@@ -34,7 +34,7 @@ There was no standardised format for inputting rate cards, so I created a basic 
 
 Below the column titles are the infrastructure types and their associated cost. The item field is just the name of the infrastructure type. I determined that any item with a per meter ("/m") snippet is an edge, and any other items are nodes. 
 
-There are two possible types of cost structures. A flat rate is when you provide a number in the cost field. In this case, each node will cost this flat rate and each edge will cost this flat rate for each meter in length. 
+There are two possible types of cost structures. A flat rate is when you provide only a number in the cost field. In this case, each node will cost this flat rate and each edge will cost this flat rate for each meter in length. 
 A variable rate is when the cost of the item is dependent on the distance between the item and another node type (e.g. 20 x trench length (in meters) from Cabinet). This can be inputted as `<cost-multiplier>x<node-type>` in the cost field. For the given example, the cost field will be `20xCabinet`. 
 
 The two rate cards given as part of the problem are provided as `rate_card_a.csv` and `rate_card_b.csv`.
@@ -43,8 +43,9 @@ The two rate cards given as part of the problem are provided as `rate_card_a.csv
 
 The program allows the user to calculate cost when  the cost of an item is dependent on the distance to a cabinet and there are multiple cabinets in the graph. In this event, it will find the distance to the nearest cabinet and calculate the cost accordingly.
 
-Furthermore, the user can change the node type that affects the cost of a node. For example, you can calculate the cost of a Pot based on the distance to the nearest Chamber. To do this, simply input `<cost-multiplier>x<node-type>` in the cost field of the rate card csv.
+Furthermore, the user can change the node type that affects the cost of a node. For example, you can calculate the cost of a Pot based on the distance to the nearest Chamber. To do this, simply input `<cost-multiplier>x<node-type>` (e.g. `20xChamber`) in the cost field of the rate card csv.
 
+Finally, the program supports any additional infrastructure types. The code will allow for a new node type to be added to the network and rate card files and will calculate the cost accordingly.
 
 ## Improvements
 
