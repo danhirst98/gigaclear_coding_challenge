@@ -18,6 +18,18 @@ def get_nodes(graph, node_type) -> list:
 
 
 def generate_rate_card(rate_card_csv_path, graph) -> tuple:
+    """
+    Convert rate card csv into hash table that gives the costs of different infrastructure types. For variable cost
+    structures, returns a min_weights dict that gives the minimum distances between certain infrastructure types to
+    all other nodes
+
+    :param rate_card_csv_path: path to rate card csv file
+    :type rate_card_csv_path: str, Path
+    :param graph: full graph of nodes and edges
+    :type graph: networkx.Graph
+    :return: rate_card, min_weights
+    :rtype: tuple
+    """
     # initialise rate_card and min_weights hash tables
     rate_card = {}
     min_weights = {}
@@ -36,9 +48,12 @@ def generate_rate_card(rate_card_csv_path, graph) -> tuple:
                 _, source = cost.split('x')
                 # use djikstras algorithm to find minimum weights between nodes of type source and all other nodes
                 # save in hash table for fast look up and so we don't have to calculate again
-                min_weights[source.lower()] = multi_source_dijkstra_path_length(graph,
-                                                                                get_nodes(graph, source.lower()),
-                                                                                weight='length')
+                source = source.lower()
+                if source not in min_weights.keys():
+                    min_weights[source] = multi_source_dijkstra_path_length(graph,
+                                                                            get_nodes(graph, source),
+                                                                            weight='length')
+
             # raise error if cost is not a number
             elif not cost.isnumeric():
                 raise NotImplementedError(f"Rate card gave a cost in an unknown format. Must be a number or a string "

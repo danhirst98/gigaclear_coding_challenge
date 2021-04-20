@@ -3,7 +3,17 @@ from rate_card import generate_rate_card
 import argparse
 
 
-def main(rate_card_path, graph_path):
+def main(rate_card_path, graph_path) -> float:
+    """
+    Calculates total cost of graph based on a graphml file and a rate card csv
+
+    :param rate_card_path: path to rate card csv
+    :type rate_card_path: str, Path
+    :param graph_path: path to graphml file
+    :type graph_path: str, Path
+    :return: total cost of all infrastructure in graph
+    :rtype: float
+    """
     # Initialise total cost
     total_cost = 0
 
