@@ -53,3 +53,5 @@ With more time I would swap over all functions using networkx to use networkit. 
 
 Additionally, I would change the delimiter for the variable rate away from `x`. Currently, the code breaks if the node type has an x in its name.
 
+I also would add functionality to read from .dot files. 
+
