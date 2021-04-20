@@ -51,3 +51,5 @@ Finally, the program supports any additional infrastructure types. The code will
 
 With more time I would swap over all functions using networkx to use networkit. Unlike networkx which is written in Python, networkit is written in C and has [significant speed advantages](https://www.timlrx.com/blog/benchmark-of-popular-graph-network-packages).
 
+Additionally, I would change the delimiter for the variable rate away from `x`. Currently, the code breaks if the node type has an x in its name.
+
