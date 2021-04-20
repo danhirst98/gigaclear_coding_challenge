@@ -53,13 +53,17 @@ def main(rate_card_path, graph_path) -> float:
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="This program takes a given graph and rate card and calculates the "
                                                  "total cost of the network")
-    parser.add_argument("-r", "--rate_card", help="path to rate card csv")
-    parser.add_argument("-g", "--graph", help="path to graph file")
+    parser.add_argument("-r", "--rate_card", help="path to rate card csv", required=True)
+    parser.add_argument("-g", "--graph", help="path to graph .graphml file", required=True)
 
     args = parser.parse_args()
     rate_card_path_arg = args.rate_card
     graph_path_arg = args.graph
 
+    if not graph_path_arg:
+        raise ValueError("Must provide path to graph .graphml file")
+    if not rate_card_path_arg:
+        raise ValueError("Must provide path to rate card .csv file")
     # check that rate_card is a csv
     if not rate_card_path_arg.endswith('.csv'):
         raise TypeError("Rate Card must be a csv file")
