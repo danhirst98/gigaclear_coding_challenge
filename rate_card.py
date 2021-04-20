@@ -21,7 +21,8 @@ def generate_rate_card(rate_card_csv_path, graph) -> tuple:
         rate_card_csv = csv.reader(csvfile, delimiter=',')
         next(rate_card_csv, None)  # skip header of file
         for item, cost in rate_card_csv:
-            if cost.isnumeric():
+            print(cost)
+            if cost.strip().isnumeric():
                 cost = float(cost)
             elif 'x' in cost:
                 cost = cost
@@ -29,12 +30,9 @@ def generate_rate_card(rate_card_csv_path, graph) -> tuple:
                 min_weights[source] = multi_source_dijkstra_path_length(graph, get_nodes(graph, source), weight='length')
             else:
                 raise NotImplementedError("")
-            if "/m" in item:
-                name = re.findall(r'\((.*?)\)', item)[0].lower()
-                rate_card[name] = cost
-            else:
-                node_type = item.lower()
-                rate_card[node_type] = Node(node_type=node_type, cost=cost)
+            name = re.findall(r'\((.*?)\)', item)[0].lower() if "/m" in item else item.lower()
+            rate_card[name] = cost
+
     return rate_card, min_weights
 
 # def generate_rate_card(rate_card_csv_path) -> dict:
