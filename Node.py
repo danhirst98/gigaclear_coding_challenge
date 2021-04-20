@@ -2,7 +2,10 @@ from numbers import Number
 
 
 class Node:
-    def __init__(self, node_type, cost, number=0):
+    """
+    This class stores the node type, cost, and number of this node within a graph
+    """
+    def __init__(self, node_type, cost, count=0):
         if not isinstance(node_type, str):
             raise TypeError(f"Node type name must be of type str. Was type {type(node_type)}")
         if not isinstance(cost, Number) and not (isinstance(cost, str) and cost.isnumeric()):
@@ -12,15 +15,12 @@ class Node:
 
         self.type = node_type
         self.cost = float(cost)
-        self.number = number
+        self.count = count
 
     def __repr__(self):
-        return f"{self.type}, {self.cost}, {self.number}"
-
-    def add_number(self, number=1):
-        self.number += number
+        return f"node type: {self.type}, cost: £{self.cost}, number of occurrences: {self.count}"
 
     def get_total_cost(self):
-        return self.cost * self.number
+        return self.cost * self.count
 
 

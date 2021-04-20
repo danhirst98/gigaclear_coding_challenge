@@ -19,8 +19,6 @@ class Edge:
     def __repr__(self):
         return f"{self.name}, {self.cost_per_meter}, {self.length}"
 
-    def add_length(self, length):
-        self.length += length
 
     def get_total_cost(self):
         return self.length * self.cost_per_meter
